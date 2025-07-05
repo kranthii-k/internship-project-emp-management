@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Payment</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #002b5c, #1e90ff); /* Dark to bright blue gradient */
+            color: #ffffff; /* White text for contrast */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+    
+        .container {
+            inline-size: 90%;
+            max-inline-size: 1000px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #004080; /* Deep blue background */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            border-radius: 12px;
+        }
+    
+        h1 {
+            text-align: center;
+            color: #1e90ff; /* Bright blue heading */
+            margin-bottom: 20px;
+            text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+        }
+    
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap; /* Responsive wrapping */
+            gap: 20px;
+            justify-content: space-between;
+        }
+    
+        .section {
+            flex: 1;
+            min-inline-size: 280px; /* Minimum width for smaller screens */
+            padding: 20px;
+            background-color: #00509e; /* Lighter blue for sections */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+    
+        .section h3 {
+            color: #1e90ff; /* Bright blue for section titles */
+            margin-bottom: 15px;
+        }
+    
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #e0f7ff; /* Light blue for labels */
+        }
+    
+        input, select {
+            inline-size: 100%;
+            padding: 12px;
+            margin-block-end: 15px;
+            border: 1px solid #1e90ff; /* Blue border for inputs */
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: #003f7f; /* Darker blue input background */
+            color: #e0f7ff; /* Light blue input text */
+        }
+    
+        input:focus, select:focus {
+            border-color: #00bfff; /* Bright blue on focus */
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 191, 255, 0.5); /* Bright blue glow */
+        }
+    
+        button {
+            inline-size: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00509e, #1e90ff); /* Blue gradient button */
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+    
+        button:hover {
+            background: linear-gradient(135deg, #1e90ff, #00509e);
+            transform: translateY(-2px);
+        }
+    
+        button:active {
+            background: linear-gradient(135deg, #003f7f, #004080);
+            transform: translateY(0);
+        }
+    
+        .error {
+            color: #ff4d4d; /* Red for error messages */
+            text-align: center;
+            margin-block-end: 15px;
+            font-weight: bold;
+        }
+    
+        .success {
+            color: #4dff88; /* Green for success messages */
+            text-align: center;
+            margin-block-end: 15px;
+            font-weight: bold;
+        }
+    
+        .logout-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #1e90ff; /* Bright blue for logout button */
+            color: white;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+    
+        .logout-btn:hover {
+            background-color: #00509e; /* Darker blue hover */
+        }
+    
+        .logout-btn:active {
+            background-color: #003f7f;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Schedule Payment</h1>
+
+        <!-- Success or Error Messages -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p class="success">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <!-- Payment Form -->
+        <form method="post">
+            {% csrf_token %}
+            <div class="dashboard">
+                <div class="section">
+                    <h3>Payment Details</h3>
+                    <label for="employee">Select Employee</label>
+                    <select id="employee" name="employee" required>
+                        <option value="">Select an employee</option>
+                        {% for employee in employees %}
+                            <option value="{{ employee.id }}">{{ employee.username }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label for="amount">Payment Amount</label>
+                    <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
+
+                    <label for="payment_date">Payment Date</label>
+                    <input type="date" id="payment_date" name="payment_date" required>
+
+                    <button type="submit">Schedule Payment</button>
+                    {% if messages %}
+                        <div class="messages">
+                            {% for message in messages %}
+                                <p class="success">{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+
+        <div style="text-align: center; margin-block-start: 30px;">
+            <a href="{% url 'home' %}" class="logout-btn">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

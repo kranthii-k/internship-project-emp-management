@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payroll List</title>
+</head>
+<body>
+    <h1>Scheduled Payments</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Amount</th>
+                <th>Payment Date</th>
+                <th>Scheduled Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for payroll in payrolls %}
+            <tr>
+                <td>{{ payroll.employee.first_name }} {{ payroll.employee.last_name }}</td>
+                <td>{{ payroll.amount }}</td>
+                <td>{{ payroll.payment_date }}</td>
+                <td>{{ payroll.scheduled_date }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No scheduled payments yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div style="text-align: center; margin-block-start: 30px;">
+        <a href="{% url 'home' %}" class="logout-btn">Back to Dashboard</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit My Profile</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3a8a, #60a5fa); /* Gradient background */
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 80%; /* Increased the width to 80% of the screen */
+            padding: 40px;
+            background-color: #ffffff; /* White background for the form */
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            margin: 20px auto;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-block-start: 0;
+            color: #1e3a8a; /* Blue color */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        form {
+            margin-top: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #1e3a8a; /* Blue color for labels */
+        }
+        
+        input[type="text"], 
+        input[type="email"], 
+        select {
+            width: 100%;
+            padding: 12px; /* Increased padding for larger input fields */
+            margin-bottom: 20px; /* Increased margin between fields */
+            border: 1px solid #1e3a8a; /* Blue border */
+            border-radius: 5px;
+            background-color: #f1f5f9; /* Light blue background for input fields */
+            color: #333333; /* Dark text color for readability */
+        }
+        
+        input:focus, 
+        select:focus {
+            outline: none;
+            border-color: #60a5fa; /* Lighter blue for focus */
+        }
+        
+        button {
+            display: block;
+            width: 100%;
+            padding: 14px; /* Increased padding for the button */
+            background-color: #1e3a8a; /* Dark blue for button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px; /* Increased font size */
+            cursor: pointer;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        button:hover {
+            background-color: #3b82f6; /* Lighter blue for hover */
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            background-color: #2563eb; /* Even lighter blue for active state */
+            transform: translateY(0);
+        }
+        
+        .text-left {
+            margin-bottom: 20px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #1e3a8a; /* Blue color for links */
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+            color: #60a5fa; /* Lighter blue on hover */
+        }
+        
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="text-left">
+        <a href="{% url 'home' %}" class="btn btn-link"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+    </div>
+    <h2>My Profile</h2>
+    <form method="POST" action="{% url 'update_profile' %}">
+        {% csrf_token %}
+        <label for="firstname">First Name</label>
+        <input type="text" id="firstname" name="firstname" value="{{ user.first_name }}" required>
+
+        <label for="lastname">Last Name</label>
+        <input type="text" id="lastname" name="lastname" value="{{ user.last_name }}" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="{{ user.email }}" required>
+        
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" name="phone" value="{{ user.phone }}" required>
+        
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+</body>
+</html>

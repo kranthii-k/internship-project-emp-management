@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Leave Request</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3a8a, #60a5fa); /* Gradient background */
+            color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h2 {
+            text-align: center;
+            margin-block-start: 20px;
+            color: #1e3a8a;
+            text-shadow: 0 1px 2px rgba(4, 7, 176, 0.1);
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 90px;
+            border-radius: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            max-inline-size: 500px;
+            margin: 20px auto;
+            color: #000000;
+        }
+
+        form label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        form input[type="text"], 
+        form input[type="date"], 
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #001325;
+            border-radius: 5px;
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        form input:focus, 
+        form textarea:focus {
+            outline: none;
+            border-color: #1e3a8a;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #60a5fa;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            background-color: #60a5fa;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <form method="POST">
+        {% csrf_token %}
+        <h2>Edit Leave Request</h2>
+        <br>
+        <label for="leave_type">Leave Type:</label>
+        <input type="text" id="leave_type" name="leave_type" value="{{ leave_request.leave_type }}" required>
+        
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" value="{{ leave_request.start_date }}" required>
+        
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" value="{{ leave_request.end_date }}" required>
+        
+        <label for="reason">Reason:</label>
+        <textarea id="reason" name="reason" required>{{ leave_request.reason }}</textarea>
+        
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

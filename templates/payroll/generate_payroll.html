@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Payroll</title>
+</head>
+<body>
+    <h1>Generate Payroll for {{ employee.first_name }} {{ employee.last_name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="period_start">Start Date:</label>
+        <input type="date" id="period_start" name="period_start" required><br><br>
+
+        <label for="period_end">End Date:</label>
+        <input type="date" id="period_end" name="period_end" required><br><br>
+
+        <button type="submit">Generate Payroll</button>
+    </form>
+</body>
+</html>

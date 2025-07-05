@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .email-container {
+            max-inline-size: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+        }
+        .details {
+            margin: 20px 0;
+        }
+        .footer {
+            margin-block-start: 20px;
+            font-size: 0.9em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <h2>Payroll Scheduled Successfully</h2>
+        <p>Dear {{ username }},</p>
+        <p>Your payroll for the month has been successfully scheduled. Below are the details:</p>
+        <div class="details">
+            <p><strong>Total Working Days:</strong> {{ total_working_days }}</p>
+            <p><strong>Days Worked:</strong> {{ days_worked }}</p>
+            <p><strong>Monthly Salary:</strong> ₹{{ monthly_salary }}</p>
+        </div>
+        <p>Regards,<br>HR Team</p>
+        <div class="footer">
+            <p>If you have any questions, please contact us at support@company.com.</p>
+        </div>
+    </div>
+</body>
+</html>

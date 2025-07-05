@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Employee</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a, #60a5fa); /* Gradient background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #1e3a8a;
+        }
+    
+        .container {
+            background-color: #ffffff; /* White container */
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+        }
+    
+        h2 {
+            text-align: center;
+            color: #1e3a8a; /* Dark blue heading */
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+    
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+    
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #1e293b; /* Slightly darker text */
+        }
+    
+        .form-group input,
+        .form-group select {
+            padding: 10px;
+            border: 1px solid #cbd5e1; /* Light gray border */
+            border-radius: 8px;
+            background-color: #f1f5f9; /* Very light gray background */
+            color: #1e293b; /* Dark gray text */
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+    
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #60a5fa; /* Blue focus border */
+            outline: none;
+        }
+    
+        .password-container {
+            position: relative;
+        }
+    
+        .password-container input {
+            width: calc(100% - 40px); /* Leaves space for the eye icon */
+            display: inline-block;
+        }
+    
+        .password-container .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #6b7280; /* Neutral gray */
+            font-size: 16px;
+        }
+    
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: #60a5fa; /* Primary button color */
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+    
+        button:hover {
+            background-color: #3b82f6; /* Slightly darker blue */
+            transform: translateY(-2px); /* Lift effect */
+        }
+    
+        button:active {
+            background-color: #2563eb; /* Even darker blue */
+        }
+    
+        .login-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+    
+        .login-link a {
+            color: #1e3a8a; /* Dark blue link */
+            text-decoration: none;
+            font-weight: bold;
+        }
+    
+        .login-link a:hover {
+            color: #2563eb; /* Slightly lighter blue on hover */
+        }
+    
+        .errorlist {
+            color: #f87171; /* Red for errors */
+            margin-bottom: 15px;
+            list-style: none;
+            padding: 0;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <div class="container">
+        <h1>Edit Employee: {{ employee.first_name }} {{ employee.last_name }}</h1>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" value="{{ employee.first_name }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" value="{{ employee.last_name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="{{ employee.email }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" value="{{ employee.phone }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select id="role" name="role" required>
+                    <option value="Software Engineer" {% if employee.role == "Software Engineer" %}selected{% endif %}>Software Engineer</option>
+                    <option value="Manager" {% if employee.role == "Manager" %}selected{% endif %}>Manager</option>
+                    <option value="Hr" {% if employee.role == "Hr" %}selected{% endif %}>HR</option>
+                    <option value="Developer" {% if employee.role == "Developer" %}selected{% endif %}>Developer</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select id="status" name="status" required>
+                    <option value="Active" {% if employee.role == "Active" %}selected{% endif %}>Active</option>
+                    <option value="Inactive" {% if employee.role == "Inactive" %}selected{% endif %}>Inactive</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="hourly_rate">Hourly Rate</label>
+                <input type="text" id="hourly_rate" name="hourly_rate" value="{{ employee.hourly_rate }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="date_joined">Date Joined</label>
+                <input type="date" id="date_joined" name="date_joined" value="{{ employee.date_joined|date:'Y-m-d' }}" readonly>
+            </div>
+            
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+
+</body>
+</html>

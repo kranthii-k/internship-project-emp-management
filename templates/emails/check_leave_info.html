@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Information</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3a8a, #60a5fa); /* Gradient background */
+            color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h3 {
+            text-align: center;
+            color: #00bcd4;
+            margin-block-start: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+        }
+
+        .container {
+            inline-size: 90%;
+            max-inline-size: 800px;
+            margin: 20px auto;
+            background-color: #343a40;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            padding: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            margin-block-start: 10px;
+            background-color: #00bcd4;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #0097a7;
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-link {
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .btn-link:hover {
+            text-decoration: underline;
+        }
+
+        .info {
+            background-color: #3c4147;
+            padding: 15px;
+            border-radius: 8px;
+            margin-block-end: 20px;
+        }
+
+        .info p {
+            font-size: 18px;
+            color: #e9ecef;
+        }
+
+        .info p strong {
+            color: #00bcd4;
+            font-weight: bold;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-left">
+            <a href="{% url 'leave_requests' %}" class="btn btn-link"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+        </div>
+        <h3>Leave Information</h3>
+
+        <div class="info">
+            <p><strong>Total Days with Company:</strong> {{ total_days_with_company }} days</p>
+            <p><strong>Total Leave Taken:</strong> {{ total_leave_taken }} days</p>
+            <p><strong>Annual Remaining Leave:</strong> {{ remaining_leave }} days</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
